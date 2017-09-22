@@ -10,13 +10,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author yan
  */
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED)
 @Repository
 public class ArticleDAO implements IArticleDAO {
 
@@ -25,7 +26,8 @@ public class ArticleDAO implements IArticleDAO {
 
     @Override
     public Article getArticleById(int articleId) {
-        return entityManager.find(Article.class, articleId);
+        Article article = entityManager.find(Article.class, articleId);
+        return article;
     }
 
     @SuppressWarnings("unchecked")

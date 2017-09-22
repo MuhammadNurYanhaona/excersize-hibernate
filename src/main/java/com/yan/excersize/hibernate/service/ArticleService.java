@@ -14,7 +14,12 @@ import com.yan.excersize.hibernate.domain.Article;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+@Transactional
 @Service
 public class ArticleService implements IArticleService {
 
@@ -23,8 +28,7 @@ public class ArticleService implements IArticleService {
 
     @Override
     public Article getArticleById(int articleId) {
-        Article obj = articleDAO.getArticleById(articleId);
-        return obj;
+        return articleDAO.getArticleById(articleId);
     }
 
     @Override

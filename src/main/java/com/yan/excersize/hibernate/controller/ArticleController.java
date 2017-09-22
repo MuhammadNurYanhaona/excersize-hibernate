@@ -11,6 +11,8 @@ package com.yan.excersize.hibernate.controller;
  */
 import com.yan.excersize.hibernate.domain.Article;
 import com.yan.excersize.hibernate.service.IArticleService;
+
+import java.lang.reflect.Proxy;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -27,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("articles")
 public class ArticleController {
 
     @Autowired
@@ -36,6 +38,9 @@ public class ArticleController {
     @GetMapping("article/{id}")
     public ResponseEntity<Article> getArticleById(@PathVariable("id") Integer id) {
         Article article = articleService.getArticleById(id);
+        if (Proxy.isProxyClass(article.getClass())) {
+            System.out.println("Found a proxy!!!");
+        }
         return new ResponseEntity<Article>(article, HttpStatus.OK);
     }
 

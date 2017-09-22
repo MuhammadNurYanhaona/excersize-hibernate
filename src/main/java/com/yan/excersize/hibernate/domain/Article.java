@@ -6,12 +6,7 @@
 package com.yan.excersize.hibernate.domain;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "articles")
@@ -20,7 +15,8 @@ public class Article implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_seq_gen")
+    @SequenceGenerator(name = "article_seq_gen", sequenceName = "article_seq", allocationSize = 1)
     @Column(name = "article_id")
     private int articleId;
 
