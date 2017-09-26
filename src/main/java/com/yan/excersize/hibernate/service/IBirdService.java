@@ -14,4 +14,7 @@ public interface IBirdService {
     List<Bird> getBirds();
     List<ProvincialBird> getProvincialBirds();
     List<MigratoryBird> getMigratoryBirds();
+
+    void saveBird(MigratoryBird bird);
+    void saveBird(ProvincialBird bird);
 }

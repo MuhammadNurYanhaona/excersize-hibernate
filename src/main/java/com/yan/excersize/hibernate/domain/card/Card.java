@@ -1,5 +1,8 @@
 package com.yan.excersize.hibernate.domain.card;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 /**
@@ -9,6 +12,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "cards")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Card {
 
     @Id

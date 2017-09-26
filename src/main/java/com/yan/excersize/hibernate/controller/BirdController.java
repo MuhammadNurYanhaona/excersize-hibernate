@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -40,5 +42,17 @@ public class BirdController {
     public ResponseEntity<List<MigratoryBird>> getTravelingBirds() {
         List<MigratoryBird> list = birdService.getMigratoryBirds();
         return new ResponseEntity<List<MigratoryBird>>(list, HttpStatus.OK);
+    }
+
+    @PostMapping("addLocal")
+    public ResponseEntity<String> addLocalBird(@RequestBody ProvincialBird bird) {
+        birdService.saveBird(bird);
+        return new ResponseEntity<String>("Local bird created", HttpStatus.CREATED);
+    }
+
+    @PostMapping("addTraveling")
+    public ResponseEntity<String> addLocalBird(@RequestBody MigratoryBird bird) {
+        birdService.saveBird(bird);
+        return new ResponseEntity<String>("Migratory bird created", HttpStatus.CREATED);
     }
 }

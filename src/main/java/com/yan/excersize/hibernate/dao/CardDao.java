@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -26,9 +29,7 @@ public class CardDao implements ICardDao {
 
     @Override
     public List<Card> getCards() {
-        String hql = "from Card as cd order by cd.id";
-        Query query = entityManager.createQuery(hql);
-        return (List<Card>) query.getResultList();
+        return getCardsThroughCriteriaQuery();
     }
 
     @Override
@@ -50,5 +51,30 @@ public class CardDao implements ICardDao {
         String hql = "from CreditCard as cd order by cd.id";
         Query query = entityManager.createQuery(hql);
         return (List<CreditCard>) query.getResultList();
+    }
+
+    @Override
+    public void saveCard(DebitCard card) {
+        entityManager.persist(card);
+    }
+
+    @Override
+    public void saveCard(CreditCard card) {
+        entityManager.persist(card);
+    }
+
+    private List<Card> getCardsThroughNormalQuery() {
+        String hql = "from Card as cd order by cd.id";
+        Query query = entityManager.createQuery(hql);
+        return (List<Card>) query.getResultList();
+    }
+
+    private List<Card> getCardsThroughCriteriaQuery() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Card> criteria = cb.createQuery(Card.class);
+        Root<Card> card = criteria.from(Card.class);
+        criteria.select(cb.construct(Card.class,
+                card.get("id"), card.get("issuer"), card.get("brand"), card.get("pan")));
+        return entityManager.createQuery(criteria).getResultList();
     }
 }

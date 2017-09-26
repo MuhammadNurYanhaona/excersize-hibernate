@@ -33,4 +33,14 @@ public class BirdService implements IBirdService {
     public List<MigratoryBird> getMigratoryBirds() {
         return birdDao.getMigratoryBirds();
     }
+
+    @Override
+    public void saveBird(MigratoryBird bird) {
+        birdDao.saveBird(bird);
+    }
+
+    @Override
+    public void saveBird(ProvincialBird bird) {
+        birdDao.saveBird(bird);
+    }
 }

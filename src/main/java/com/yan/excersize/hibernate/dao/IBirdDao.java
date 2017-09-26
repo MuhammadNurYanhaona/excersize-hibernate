@@ -14,4 +14,7 @@ public interface IBirdDao {
     List<Bird> getBirds();
     List<ProvincialBird> getProvincialBirds();
     List<MigratoryBird> getMigratoryBirds();
+
+    void saveBird(ProvincialBird bird);
+    void saveBird(MigratoryBird bird);
 }

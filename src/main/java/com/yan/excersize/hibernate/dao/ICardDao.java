@@ -16,4 +16,7 @@ public interface ICardDao {
     List<CardInfo> getCardInfos();
     List<DebitCard> getDebitCards();
     List<CreditCard> getCreditCards();
+
+    void saveCard(DebitCard card);
+    void saveCard(CreditCard card);
 }

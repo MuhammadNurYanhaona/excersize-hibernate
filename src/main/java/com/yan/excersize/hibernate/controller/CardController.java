@@ -11,7 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -48,5 +51,17 @@ public class CardController {
     public ResponseEntity<List<CreditCard>> getAllCreditCards() {
         List<CreditCard> list = cardService.getCreditCards();
         return new ResponseEntity<List<CreditCard>>(list, HttpStatus.OK);
+    }
+
+    @PostMapping("addCredit")
+    public ResponseEntity<String> addCreditCard(@RequestBody CreditCard card) {
+        cardService.saveCard(card);
+        return new ResponseEntity<String>("Credit card created", HttpStatus.CREATED);
+    }
+
+    @PostMapping("addDebit")
+    public ResponseEntity<String> addDebitCard(@RequestBody DebitCard card) {
+        cardService.saveCard(card);
+        return new ResponseEntity<String>("Debit card created", HttpStatus.CREATED);
     }
 }

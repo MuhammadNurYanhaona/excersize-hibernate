@@ -1,5 +1,8 @@
 package com.yan.excersize.hibernate.domain.bird;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 /**
@@ -11,6 +14,8 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "data_type")
 @DiscriminatorValue("common")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Bird {
 
     @Id

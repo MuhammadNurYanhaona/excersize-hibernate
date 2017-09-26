@@ -41,4 +41,14 @@ public class CardService implements ICardService {
     public List<CreditCard> getCreditCards() {
         return cardDao.getCreditCards();
     }
+
+    @Override
+    public void saveCard(DebitCard card) {
+        cardDao.saveCard(card);
+    }
+
+    @Override
+    public void saveCard(CreditCard card) {
+        cardDao.saveCard(card);
+    }
 }
